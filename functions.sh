@@ -12,7 +12,7 @@ asking_to_install() {
         ;;
             [nN][oO]|[nN])
         echo "No"
-        exit 1
+        return 1
                 ;;
             *)
         echo "Invalid input..."
