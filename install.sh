@@ -5,6 +5,7 @@ for d in *; do
     if [ -d "$d" ]; then
         # Will not run if no directories are available
         for f2 in $(ls "$d"); do
+            # The file must be a '.sh' file
             if [[ $f2 =~ \.sh$ ]]; then
                 files+=("./${d}/${f2}")
             fi

@@ -2,10 +2,8 @@
 
 . functions.sh
 
-res=$(asking_to_install "Install composer?")
-echo $res
+if asking_to_install "Install Composer?"; then
 
-if [[ $res ]]; then
   echo "Installing..."
   sudo apt install wget curl unzip
 	cd ~

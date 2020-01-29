@@ -2,10 +2,8 @@
 
 . functions.sh
 
-res=$(asking_to_install "Install git?")
-echo $res
+if asking_to_install "Install Git?"; then
 
-if [[ $res ]]; then
   echo "Installing..."
   sudo apt-get install git -y
 

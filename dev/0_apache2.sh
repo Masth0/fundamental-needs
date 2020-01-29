@@ -2,10 +2,7 @@
 
 . functions.sh
 
-res=$(asking_to_install "Install apache2?")
-echo $res
-
-if [[ $res ]]; then
+if asking_to_install "Install apache2?"; then
   echo "Installing..."
 
   sudo apt install apache2

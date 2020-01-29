@@ -3,7 +3,7 @@
 asking_to_install() {
     while true
     do
-        read -r -p "$1? [Y/n] " input
+        read -r -p "$1 [Y/n] " input
     
         case $input in
             [yY][eE][sS]|[yY])
