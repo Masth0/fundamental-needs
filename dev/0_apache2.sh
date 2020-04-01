@@ -9,10 +9,6 @@ if asking_to_install "Install apache2?"; then
   sudo a2enmod vhost_alias
   sudo a2enmod rewrite
 
-  sudo ufw app list
-  sudo ufw allow 'Apache'
-  sudo ufw status
-
   sudo systemctl restart apache2
 
   echo "----- Copying vhosts ----- \n"
