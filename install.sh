@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/env bash
+
 
 files=()
 for d in *; do

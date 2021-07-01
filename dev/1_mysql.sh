@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 
 . functions.sh
 
@@ -8,13 +8,13 @@ if asking_to_install "Install myslq?"; then
   sudo apt install mysql-server
   sudo mysql_secure_installation
 
-  echo  "=================================================================="
+  echo "=================================================================="
   echo "1) SELECT user,authentication_string,plugin,host FROM mysql.user;"
-  echo "2) ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';"
+  echo "2) ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';"
   echo "3) FLUSH PRIVILEGES;"
   echo "4) SELECT user,authentication_string,plugin,host FROM mysql.user;"
   echo "5) exit"
-  echo  "=================================================================="
+  echo "=================================================================="
 
   sudo mysql
 else

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 
 asking_to_install() {
     while true
