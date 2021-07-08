@@ -1,6 +1,5 @@
 #!/bin/env bash
 
-
 files=()
 for d in *; do
     if [ -d "$d" ]; then

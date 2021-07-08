@@ -5,7 +5,7 @@
 php_versions=('7.2' '7.4' '8.0')
 
 if asking_to_install "Install ${php_versions[@]}?"; then
-
+  echo -e "${BLUE}Install symfony cli${NOCOLOR}"
   wget https://get.symfony.com/cli/installer -O - | bash
   sudo apt install software-properties-common
   sudo add-apt-repository ppa:ondrej/php
@@ -26,8 +26,6 @@ if asking_to_install "Install ${php_versions[@]}?"; then
     sudo systemctl restart php${version}-fpm
   done
 
+  echo -e "${BLUE} a2enmod actions actions fcgid alias proxy_fcgi"
   sudo a2enmod actions fcgid alias proxy_fcgi
-
-else
-  echo "NEXT"
 fi
