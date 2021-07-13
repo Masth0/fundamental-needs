@@ -4,29 +4,27 @@
 
 KEYS=$(ls -la ~/.ssh)
 
-if [ ${#KEYS[@]} > 0 ]; then
-  for key in ${KEYS}; do
-    if [[ $key =~ \.pub$ ]]; then
-      SSH_KEY="~/.ssh/${key}"
-      echo -e "${BLUE}Use ${GREEN}${SSH_KEY}${NOCOLOR}"
-      break
-    fi
-  done
-fi
-
 if asking_to_install "Create new ssh key?"; then
-  echo "File name:"
-  read FILE_NAME
-  ssh-keygen -t rsa -b 4096 -C "${FILE_NAME}"
+  SSH_FILENAME_DEFAULT=/home/.ssh/$(whoami)/id_rsa
+  echo -e "${BLUE}Your ssh keys:${NOCOLOR}"
+  echo -e "${BLUE}${KEYS}${NOCOLOR}"
+
+  read -p "Email for ssh?" SSH_EMAIL
+  read -p "Enter file in which to save the key (${SSH_FILENAME_DEFAULT}):" SSH_FILENAME
+  SSH_FILENAME=${SSH_FILENAME:-SSH_FILENAME_DEFAULT}
+  ssh-keygen -t rsa -C "${SSH_EMAIL}" -f "${SSH_FILENAME}"
   # Start ssh-agent
   eval "$(ssh-agent -s)"
   # Add the key to the ssh-agent
-  ssh-add "~/.ssh/${FILE_NAME}"
+  ssh-add ${SSH_FILENAME}
   echo -e "${GREEN}SSH key added to ssh-agent${NOCOLOR}"
-fi
-
-if asking_to_install "Copy ssh key to clipboard? (install xclip)"; then
-    sudo apt-get install xclip -y
-    xclip -sel clip < "~/.ssh/${FILE_NAME}.pub"
-    echo -e "${GREEN}SSH key added to your clipboard${NOCOLOR}"
+else
+  if [ ${#KEYS[@]} > 0 ]; then
+    for key in ${KEYS}; do
+      if [[ $key =~ \.pub$ ]]; then
+        SSH_KEY="~/.ssh/${key}"
+        break
+      fi
+    done
+  fi
 fi

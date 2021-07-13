@@ -10,7 +10,6 @@ if asking_to_install "Install apache2?"; then
   sudo systemctl restart apache2
 
   if asking_to_install "Copy ./vhosts/*.conf to /etc/apache2/sites-available?"; then
-    echo -e "${BLUE}----- Copying vhosts ----- \n${NOCOLOR}"
     sudo cp vhosts/*.conf /etc/apache2/sites-available
     echo -e "${GREEN}Vhosts copied ----- \n${NOCOLOR}"
   fi

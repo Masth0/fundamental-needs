@@ -23,6 +23,16 @@ if asking_to_install "Install all apps? "; then
   fi
 fi
 
+if asking_to_install "Install flameshot? "; then
+  sudo apt install flameshot
+fi
+
+if asking_to_install "Install peek? "; then
+  sudo add-apt-repository ppa:peek-developers/stable
+  sudo apt update
+  sudo apt install peek
+fi
+
 if asking_to_install "Install fish shell? "; then
   sudo apt-add-repository ppa:fish-shell/release-3
   sudo apt update

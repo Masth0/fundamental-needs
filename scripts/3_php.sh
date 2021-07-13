@@ -26,6 +26,6 @@ if asking_to_install "Install ${php_versions[@]}?"; then
     sudo systemctl restart php${version}-fpm
   done
 
-  echo -e "${BLUE} a2enmod actions actions fcgid alias proxy_fcgi"
+  echo -e "${BLUE} a2enmod actions fcgid alias proxy_fcgi${NOCOLOR}"
   sudo a2enmod actions fcgid alias proxy_fcgi
 fi

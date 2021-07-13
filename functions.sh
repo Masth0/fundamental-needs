@@ -29,11 +29,11 @@ asking_to_install() {
       return 0
       ;;
     [nN][oO] | [nN])
-      echo -e "${ORANGE}Installation skipped${NOCOLOR}"
+      echo -e "${ORANGE}Skipped${NOCOLOR}"
       return 1
       ;;
     *)
-      echo -e "${ORANGE}Installation skipped${NOCOLOR}"
+      echo -e "${ORANGE}Skipped${NOCOLOR}"
       return 1
       ;;
     esac
