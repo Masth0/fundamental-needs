@@ -3,41 +3,45 @@
 # ----------------------------------
 # Colors
 # ----------------------------------
-NOCOLOR='\033[0m'
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-ORANGE='\033[0;33m'
-BLUE='\033[0;34m'
-PURPLE='\033[0;35m'
-CYAN='\033[0;36m'
-LIGHTGRAY='\033[0;37m'
-DARKGRAY='\033[1;30m'
-LIGHTRED='\033[1;31m'
-LIGHTGREEN='\033[1;32m'
-YELLOW='\033[1;33m'
-LIGHTBLUE='\033[1;34m'
-LIGHTPURPLE='\033[1;35m'
-LIGHTCYAN='\033[1;36m'
-WHITE='\033[1;37m'
+NC='\e[0m'
+RED='\e[0;31m'
+GREEN='\e[0;32m'
+ORANGE='\e[0;33m'
+BLUE='\e[0;34m'
+PURPLE='\e[0;35m'
+CYAN='\e[1;36m'
+LIGHTGRAY='\e[0;37m'
+DARKGRAY='\e[1;30m'
+LIGHTRED='\e[1;31m'
+LIGHTGREEN='\e[1;32m'
+YELLOW='\e[1;33m'
+LIGHTBLUE='\e[1;34m'
+LIGHTPURPLE='\e[1;35m'
+LIGHTCYAN='\e[1;36m'
+WHITE='\e[1;37m'
 
-asking_to_install() {
+YN_COLOR="\033[1;106;37m"
+PROMPT_COLOR="\033[1;106;37m"
+
+prompt() {
   while true; do
-    read -r -p "$1 [y/N]" input
+    prompt=$(echo -e "${CYAN}$1 [y/N] ${NC}")
+    read -r -p "$prompt" input
 
     case $input in
     [yY][eE][sS] | [yY])
       return 0
       ;;
     [nN][oO] | [nN])
-      echo -e "${ORANGE}Skipped${NOCOLOR}"
+      echo -e "${YELLOW}Cancelled${NC}"
       return 1
       ;;
     *)
-      echo -e "${ORANGE}Skipped${NOCOLOR}"
+      echo -e "${YELLOW}Cancelled${NC}"
       return 1
       ;;
     esac
   done
 }
 
-export -f asking_to_install
+export -f prompt

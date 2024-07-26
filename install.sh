@@ -1,25 +1,37 @@
 #!/bin/env bash
 
-files=()
-for d in *; do
-    if [ -d "$d" ]; then
-        # Will not run if no directories are available
-        for f2 in $(ls "$d"); do
-            # The file must be a '.sh' file
-            if [[ $f2 =~ \.sh$ ]]; then
-                files+=("./${d}/${f2}")
-            fi
-        done
-    fi
-done
 
-str=""
-for ((i = 0 ; i < ${#files[@]} ; i++)); do
-  if [[ $i < $((${#files[@]} - 1)) ]]; then
-    str+="bash ${files[$i]} && "
-  else
-    str+="bash ${files[$i]}"
+directory="${BASH_SOURCE[0]%/*}/scripts"
+PS3=$'\e[1;36mWhat do you would like to install? \e[0m'
+declare -A files
+
+for file in "$directory"/*.sh; do
+  if [ -f "$file" ]; then
+    fileName="${file##*/}"
+    key="${fileName%.sh}"
+    files["${key^}"]="$file"
   fi
 done
 
-eval "$str"
+main() {
+  while [ "${#files[@]}" -gt 0 ]; do
+    select choice in "${!files[@]}"; do
+
+      if [ -n "${files[$choice]}" ]; then
+        chmod +x "${files[$choice]}"
+        eval "${files[$choice]}"
+        result=$?
+
+        if [ "$result" == "0" ]; then
+          unset 'files[$choice]'
+        fi
+
+        echo ""
+        break
+      fi
+
+    done
+  done
+}
+
+main
