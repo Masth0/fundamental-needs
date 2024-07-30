@@ -12,7 +12,7 @@ if [ "$result" -eq 0 ]; then
 
   # Open the fish configuration in the browser
   if prompt "Start the web-based configuration interface?"; then
-    fish -c 'fish_config browse'
+    fish -c "fish_config browse"
   fi
 
   # Define Fish shell by default

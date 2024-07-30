@@ -2,7 +2,7 @@
 
 
 directory="${BASH_SOURCE[0]%/*}/scripts"
-PS3=$'\e[1;36mWhat do you would like to install? \e[0m'
+PS3=$"\e[1;36mPlease choose one of the following options: \e[0m"
 declare -A files
 
 for file in "$directory"/*.sh; do
@@ -23,7 +23,7 @@ main() {
         result=$?
 
         if [ "$result" == "0" ]; then
-          unset 'files[$choice]'
+          unset "files[$choice]"
         fi
 
         echo ""
