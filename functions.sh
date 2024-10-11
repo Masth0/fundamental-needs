@@ -4,6 +4,7 @@
 # Colors
 # ----------------------------------
 NC='\e[0m'
+BOLD='\e[1m'
 RED='\e[0;31m'
 GREEN='\e[0;32m'
 ORANGE='\e[0;33m'
@@ -20,12 +21,12 @@ LIGHTPURPLE='\e[1;35m'
 LIGHTCYAN='\e[1;36m'
 WHITE='\e[1;37m'
 
-YN_COLOR="\033[1;106;37m"
-PROMPT_COLOR="\033[1;106;37m"
+YN_COLOR="\e[1;106;37m"
+PROMPT_COLOR="\e[1;107;30m"
 
 prompt() {
   while true; do
-    prompt=$(echo -e "${CYAN}$1 [y/N] ${NC}")
+    prompt=$(echo -e "\n${BOLD}$1 [y/N]${NC} \n")
     read -r -p "$prompt" input
 
     case $input in
@@ -34,14 +35,21 @@ prompt() {
       ;;
     [nN][oO] | [nN])
       echo -e "${YELLOW}Cancelled${NC}"
+      clearScreen
       return 1
       ;;
     *)
       echo -e "${YELLOW}Cancelled${NC}"
+      clearScreen
       return 1
       ;;
     esac
   done
+
+}
+
+clearScreen() {
+  clear
 }
 
 export -f prompt

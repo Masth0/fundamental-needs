@@ -1,10 +1,14 @@
-FROM ubuntu:22.04 as Ubuntu-test
+FROM ubuntu:22.04 as ubuntu-22
 
-ENV PASS root
+ENV TERM=xterm-256color
 
-RUN apt-get update && \
-    apt-get -y install sudo &&
+RUN apt-get update && apt-get -y install sudo openssh-client
+RUN useradd bloodynine --create-home --password password
+RUN usermod -aG sudo bloodynine
 
+USER bloodynine
 WORKDIR /app
 
-COPY . /app
+COPY ./scripts /app/scripts
+COPY ./functions.sh /app
+COPY ./install.sh /app

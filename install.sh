@@ -1,8 +1,9 @@
 #!/bin/env bash
 
+. functions.sh
 
 directory="${BASH_SOURCE[0]%/*}/scripts"
-PS3=$"\e[1;36mPlease choose one of the following options: \e[0m"
+PS3=$'\e[1;mPlease choose one of the following options: \e[m'
 declare -A files
 
 for file in "$directory"/*.sh; do

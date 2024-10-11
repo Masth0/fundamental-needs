@@ -6,6 +6,11 @@ prompt "Install a new ssh key?"
 result=$?
 
 if [ "$result" -eq 0 ]; then
+  # .ssh doesn't exist?
+  if [ ! -d "$HOME/.ssh" ]; then
+    echo -e "${BLUE}Create .ssh directory${NC}"
+    mkdir "$HOME/.ssh"
+  fi
 
   KEYS=$(ls -la ~/.ssh)
   SSH_FILENAME_DEFAULT=/home/$(whoami)/.ssh/id_ed25519
