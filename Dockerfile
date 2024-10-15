@@ -1,12 +1,14 @@
 FROM ubuntu:22.04 as ubuntu-22
 
+ARG USERNAME=bloodynine
+ARG PASSWORD=bloodynine
 ENV TERM=xterm-256color
 
 RUN apt-get update && apt-get -y install sudo openssh-client
-RUN useradd bloodynine --create-home --password password
-RUN usermod -aG sudo bloodynine
+RUN useradd --create-home -p "$(openssl passwd -1 $PASSWORD)" $USERNAME
+RUN usermod -aG sudo $USERNAME
 
-USER bloodynine
+USER $USERNAME
 WORKDIR /app
 
 COPY ./scripts /app/scripts

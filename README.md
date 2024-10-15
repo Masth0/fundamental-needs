@@ -1,5 +1,11 @@
 # fundamental-needs
 
+## Test
+Pour tester dans docker :
+```bash
+docker build -t ubuntu:22 . && docker run -it ubuntu:22 bash
+```
+
 Il est possible de faire les dossiers comme on veut.  
 Le script va parcourir les dossiers, dans chaque dossier s'il ya un fichier **".sh"** il sera exécuté.  
 Pour l'ordre d'éxécution des fichiers ce sera l'ordre alphabétique.
