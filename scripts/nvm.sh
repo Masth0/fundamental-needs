@@ -2,23 +2,13 @@
 
 . functions.sh
 
-prompt "Install Git?"
+prompt "Install NVM?"
 result=$?
 
 if [ "$result" -eq 0 ]; then
-  sudo apt-get install git -y
-
-  clear
-	read -r -p "$(echo -e "${BOLD}Enter the Global Username for Git: ${NC}")" GITUSER;
-	git config --global user.name "${GITUSER}"
-
-	read -r -p "$(echo -e "${BOLD}Enter the Global Email for Git: ${NC}")" GITEMAIL;
-	git config --global user.email "${GITEMAIL}"
-
-	echo "--------------------------"
-	echo -e "Git config:"
-	git config --list
-	echo "--------------------------"
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+  export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 else
   exit 1
 fi

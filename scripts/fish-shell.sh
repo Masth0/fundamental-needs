@@ -15,6 +15,13 @@ if [ "$result" -eq 0 ]; then
     fish -c "fish_config browse"
   fi
 
+  # Add Fisher, bass and nvm plugin
+  # @see https://github.com/jorgebucaran/fisher
+  if prompt "Install Fisher and nvm plugin for fish?"; then
+    curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+    fisher install jorgebucaran/nvm.fish
+  fi
+
   # Define Fish shell by default
   if asking_to_install "Set Fish shell as default shell?"; then
     echo /usr/local/bin/fish | sudo tee -a /etc/shells

@@ -6,8 +6,9 @@ prompt "Install PHP?"
 result=$?
 
 if [ "$result" -eq 0 ]; then
-  read -r -p "Which version of php-fpm do you want to install? " -a php_versions
+  read -r -p "Which version of php-fpm do you want to install? (${PHP_VERSIONS[@]}) " -a php_versions
   echo  "${php_versions[@]}"
+  # TODO
 
   # Composer
   if prompt "Install Composer?"; then
