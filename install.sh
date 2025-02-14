@@ -1,11 +1,18 @@
 #!/bin/env bash
 
 . functions.sh
+. config.cfg
+
 
 directory="${BASH_SOURCE[0]%/*}/scripts"
 PS3=$'\e[1;mPlease choose one of the following options: \e[m'
 declare -A files
 files_keys=()
+
+
+# Convertir la variable VERSIONS en tableau
+#IFS=',' read -r -a VERSIONS <<< "$PHP_VERSIONS"
+echo "${PHP_VERSIONS[@]}"
 
 for file in "$directory"/*.sh; do
   if [ -f "$file" ]; then
@@ -19,8 +26,8 @@ done
 files_keys+=('Quit (or press q)')
 
 main() {
-  COLUMNS=1 # Force select menu in one column
   while [ "${#files[@]}" -gt 0 ]; do
+    COLUMNS=1 # Force select menu in one column
     select choice in "${files_keys[@]}"; do
       # Choose the choice 'Quit' or press 'q'
       if [[ "$choice" = "Quit" || $REPLY = "q" ]]; then
