@@ -14,7 +14,7 @@ if [ -z "$LATEST_VERSION" ]; then
   exit 1
 fi
 
-prompt "Install NVM?"
+prompt "Install NVM (${LATEST_VERSION})?"
 result=$?
 
 if [ "$result" -eq 0 ]; then
